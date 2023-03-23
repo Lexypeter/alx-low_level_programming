@@ -1,39 +1,19 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "function_pointers.h"
 
 /**
- * main - check the code for Holberton School students.
- * @argc: argument count.
- * @argv: argument vector.
+ * array_iterator - executes a function given as a
+ * parameter on each element of an array.
+ * @array: input integer array.
+ * @size: size of the array.
+ * @action: pointer to the function.
  *
- * Return: Always 0.
+ * Return: no return.
  */
-int main(int argc, char *argv[])
+void array_iterator(int *array, size_t size, void (*action)(int))
 {
-	char *opc = (char *) main;
-	int i, nbytes;
+	unsigned int i;
 
-	if (argc != 2)
-	{
-		printf("Error\n");
-		exit(1);
-	}
-
-	nbytes = atoi(argv[1]);
-
-	if (nbytes < 0)
-	{
-		printf("Error\n");
-		exit(2);
-	}
-
-	for (i = 0; i < nbytes; i++)
-	{
-		printf("%02x", opc[i] & 0xFF);
-		if (i != nbytes - 1)
-			printf(" ");
-	}
-
-	printf("\n");
-	return (0);
+	if (array && action)
+		for (i = 0; i < size; i++)
+			action(array[i]);
 }
